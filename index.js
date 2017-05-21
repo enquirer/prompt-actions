@@ -27,12 +27,13 @@ function Actions(choices) {
  * @api public
  */
 
-Actions.prototype.number = function(pos) {
-  if (pos <= this.choices.length && pos >= 0) {
-    this.choices.position = pos - 1;
+Actions.prototype.number = function(pos, key) {
+  pos = key ? Number(key.value) : this.position(pos);
+  if (pos >= 0 && pos <= this.choices.length) {
+    this.position(--pos);
     this.choices.radio();
   }
-  return pos - 1;
+  return pos;
 };
 
 /**
@@ -44,6 +45,7 @@ Actions.prototype.number = function(pos) {
  */
 
 Actions.prototype.space = function(pos) {
+  pos = this.position(pos);
   this.choices.radio();
   return pos;
 };
@@ -70,7 +72,7 @@ Actions.prototype.space = function(pos) {
  */
 
 Actions.prototype.tab = function(pos) {
-  return pos;
+  return this.position(pos);
 };
 
 /**
@@ -82,10 +84,10 @@ Actions.prototype.tab = function(pos) {
  * @api public
  */
 
-Actions.prototype.a = function() {
+Actions.prototype.a = function(pos) {
   this.choices[this.choices.all ? 'uncheck' : 'check']();
   this.choices.update();
-  return this.choices.position;
+  return this.position(pos);
 };
 
 /**
@@ -94,9 +96,10 @@ Actions.prototype.a = function() {
  * @api public
  */
 
-Actions.prototype.i = function() {
+Actions.prototype.i = function(pos) {
   this.choices.toggle();
-  return this.choices.position;
+  this.choices.update();
+  return this.position(pos);
 };
 
 /**
@@ -106,7 +109,8 @@ Actions.prototype.i = function() {
  * @api public
  */
 
-Actions.prototype.down = function(pos) {
+Actions.prototype.down = function(pos, key) {
+  pos = this.position(pos);
   return (pos < this.choices.length - 1) ? pos + 1 : 0;
 };
 
@@ -117,7 +121,8 @@ Actions.prototype.down = function(pos) {
  * @api public
  */
 
-Actions.prototype.up = function(pos) {
+Actions.prototype.up = function(pos, key) {
+  pos = this.position(pos);
   return (pos > 0) ? pos - 1 : this.choices.length - 1;
 };
 
@@ -131,8 +136,26 @@ Actions.prototype.up = function(pos) {
  * @api public
  */
 
-Actions.prototype.enter = function(pos) {
-  return pos;
+Actions.prototype.enter = function(pos, key) {
+  return this.position(pos);
+};
+
+/**
+ * Helper for getting the current position.
+ *
+ * @param {Number} `pos` (optional) Current position
+ * @return {Number} Returns given `pos` or `choices.position`
+ * @api public
+ */
+
+Actions.prototype.position = function(pos) {
+  if (typeof pos === 'number') {
+    if (pos >= 0 && pos <= this.choices.length) {
+      this.choices.position = pos;
+    }
+    return pos;
+  }
+  return this.choices.position;
 };
 
 /**
