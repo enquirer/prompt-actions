@@ -21,19 +21,24 @@ function Actions(choices) {
 
 /**
  * Handle `number` keypress events. Toggles the choice at
- * corresponding row, starting at `1` (1-based index).
+ * corresponding row, starting at `1`. Because of this (1-based index)
+ * we need to decrement the returned position by `1`, so that
+ * the "real" position is correct.
  *
  * @return {Number} Returns `choices.position`
  * @api public
  */
 
 Actions.prototype.number = function(pos, key) {
-  pos = key ? Number(key.value) : this.position(pos);
+  if (key && key.hasOwnProperty('value')) {
+    pos = Number(key.value);
+  }
+  pos = this.position(pos);
   if (pos >= 0 && pos <= this.choices.length) {
-    this.position(--pos);
+    this.choices.position = pos - 1;
     this.choices.radio();
   }
-  return pos;
+  return pos - 1;
 };
 
 /**
