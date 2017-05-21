@@ -1,92 +1,139 @@
 'use strict';
 
-function Actions(prompt) {
-  this.prompt = prompt;
+/**
+ * Create an instance of `Actions`, optionally with an instance
+ * of [prompt-choices][]. Any of the methods may be overridden in custom
+ * prompts.
+ *
+ * ```js
+ * var Actions = require('prompt-actions');
+ * var Choices = require('prompt-choices');
+ * var choices = new Choices(['foo', 'bar']);
+ * var actions = new Actions(choices);
+ * ```
+ * @param {Object} `choices` Instance of [prompt-choices][]. This can alternatively be set by doing `actions.choices = new Choices(['foo', 'bar'])` after instantiation.
+ * @api public
+ */
+
+function Actions(choices) {
+  this.choices = choices;
 }
 
-Actions.prototype.number = function(pos, radio) {
+/**
+ * Handle `number` keypress events. Toggles the choice at
+ * corresponding row, starting at `1` (1-based index).
+ *
+ * @return {Number} Returns `choices.position`
+ * @api public
+ */
+
+Actions.prototype.number = function(pos) {
   if (pos <= this.choices.length && pos >= 0) {
-    this.choices[radio === true ? 'radio' : 'toggle'](pos - 1);
+    this.choices.position = pos - 1;
+    this.choices.radio();
   }
   return pos - 1;
 };
 
-Actions.prototype.down = function(pos) {
-  var n = (pos < this.choices.length - 1) ? pos + 1 : 0;
-  this.choices.position = n;
-  return n;
-};
-
-Actions.prototype.up = function(pos) {
-  var n = (pos > 0) ? pos - 1 : this.choices.length - 1;
-  this.choices.position = n;
-  return n;
-};
-
-Actions.prototype.enter = function(pos) {
-  return pos;
-};
+/**
+ * Handle `space` keypress events. Toggles the choice at the
+ * current position (e.g. on the same row as the pointer).
+ *
+ * @return {Number} Returns `choices.position`
+ * @api public
+ */
 
 Actions.prototype.space = function(pos) {
   this.choices.radio();
   return pos;
 };
 
+/**
+ * Identity function that simply returns the cursor position
+ * on `tab` keypress events. This may be overridden in custom
+ * prompts.
+ *
+ * ```js
+ * var Prompt = require('prompt-base');
+ * function MyPrompt() {
+ *   Prompt.apply(this, arguments);
+ *   this.action('tab', function() {
+ *     // do custom tab stuff
+ *   });
+ * }
+ * // inherit prompt-base
+ * Prompt.extend(MyPrompt);
+ * ```
+ *
+ * @return {Number} Returns `choices.position`
+ * @api public
+ */
+
 Actions.prototype.tab = function(pos) {
   return pos;
 };
 
-Actions.prototype.a = function() {
-  var choice = this.choices.get('all');
-  if (choice && this.choices.length > 2) {
-    this.choices[choice.checked ? 'uncheck' : 'check']();
-    this.choices[choice.checked ? 'uncheck' : 'check']('none');
-  } else {
-    this.choices.toggle();
-  }
-  return this.choices.position;
-};
+/**
+ * Handle `a` keypress events. If all choices are already checked,
+ * this will disable all choices. If zero to any other number of
+ * choices is checked, this will enable all choices.
+ *
+ * @return {Number} Returns `choices.position`
+ * @api public
+ */
 
-Actions.prototype.i = function() {
-  this.choices.forEach(function(choice) {
-    choice.checked = !choice.checked;
-  });
-  switch (this.choices.checked.length) {
-    case 0:
-      this.choices.check('none');
-      this.choices.uncheck('all');
-      break;
-    case this.choices.items.length - 2:
-      this.choices.uncheck('none');
-      this.choices.check('all');
-      break;
-    default: {
-      this.choices.uncheck(['all', 'none']);
-      break;
-    }
-  }
+Actions.prototype.a = function() {
+  this.choices[this.choices.all ? 'uncheck' : 'check']();
+  this.choices.update();
   return this.choices.position;
 };
 
 /**
- * Getter for getting the [prompt-choices][] instance from the prompt.
- *
- * @name .choices
- * @return {Object} Choices object
+ * Handle `i` keypress events. The `i` keypress toggles all choices.
+ * @return {Number} Returns `choices.position`
  * @api public
  */
 
-Object.defineProperty(Actions.prototype, 'choices', {
-  set: function(choices) {
-    this.prompt.choices = choices;
-  },
-  get: function() {
-    if (typeof this.prompt.choices === 'undefined') {
-      throw new Error('expected prompt.choices to be an object');
-    }
-    return this.prompt.choices;
-  }
-});
+Actions.prototype.i = function() {
+  this.choices.toggle();
+  return this.choices.position;
+};
+
+/**
+ * Handle `down` keypress events. Moves the cursor down one row.
+ *
+ * @return {Number} Returns the updated `choices.position`.
+ * @api public
+ */
+
+Actions.prototype.down = function(pos) {
+  return (pos < this.choices.length - 1) ? pos + 1 : 0;
+};
+
+/**
+ * Handle `up` keypress events. Moves the cursor up one row.
+ *
+ * @return {Number} Returns the updated `choices.position`.
+ * @api public
+ */
+
+Actions.prototype.up = function(pos) {
+  return (pos > 0) ? pos - 1 : this.choices.length - 1;
+};
+
+/**
+ * Identity function for handling `enter` keypress events. This
+ * is effectively a noop, since `enter` keypress events are typically
+ * ignored to allow the `line` event to be handled when an answer is
+ * submitted.
+ *
+ * @return {Number} Returns `choices.position`
+ * @api public
+ */
+
+Actions.prototype.enter = function(pos) {
+  return pos;
+};
 
 /**
  * Expose `Actions`
