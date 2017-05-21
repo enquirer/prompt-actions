@@ -1,12 +1,12 @@
 {
   "name": "prompt-actions",
-  "description": "Action manager for prompts.",
-  "version": "0.1.0",
-  "homepage": "https://github.com/jonschlinkert/prompt-actions",
+  "description": "Action manager for prompt-base.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/enquirer/prompt-actions",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "repository": "jonschlinkert/prompt-actions",
+  "repository": "enquirer/prompt-actions",
   "bugs": {
-    "url": "https://github.com/jonschlinkert/prompt-actions/issues"
+    "url": "https://github.com/enquirer/prompt-actions/issues"
   },
   "license": "MIT",
   "files": [
@@ -19,8 +19,42 @@
   "scripts": {
     "test": "mocha"
   },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-format-md": "^0.1.12",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-mocha": "^3.0.1",
+    "is-windows": "^1.0.1",
+    "mocha": "^3.4.1",
+    "prompt-choices": "^2.0.0"
+  },
   "keywords": [
     "actions",
     "prompt"
-  ]
+  ],
+  "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": [
+        "enquirer",
+        "prompt-base",
+        "prompt-choices"
+      ]
+    },
+    "lint": {
+      "reflinks": true
+    },
+    "reflinks": [
+      "base-prompt",
+      "prompt-base"
+    ]
+  }
 }
