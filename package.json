@@ -1,7 +1,7 @@
 {
   "name": "prompt-actions",
   "description": "Action manager for prompt-base.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/enquirer/prompt-actions",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "enquirer/prompt-actions",
@@ -20,14 +20,14 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-format-md": "^0.1.12",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-mocha": "^3.0.1",
-    "is-windows": "^1.0.1",
     "mocha": "^3.4.1",
-    "prompt-choices": "^2.0.0"
+    "is-windows": "^1.0.1",
+    "prompt-choices": "^2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-format-md": "^0.1.12"
   },
   "keywords": [
     "actions",
