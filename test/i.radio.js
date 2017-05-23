@@ -10,7 +10,7 @@ describe('.i (options.radio)', function() {
   it('should check all choices when .i() is the first keypress', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     actions.i();
@@ -21,7 +21,7 @@ describe('.i (options.radio)', function() {
   it('should check "all" when .i() is the first keypress', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     actions.i();
@@ -31,7 +31,7 @@ describe('.i (options.radio)', function() {
   it('should uncheck "none" when .i() is the first keypress', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     actions.i();
@@ -41,7 +41,7 @@ describe('.i (options.radio)', function() {
   it('should not check "none" when some choices are checked', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
 
@@ -55,7 +55,7 @@ describe('.i (options.radio)', function() {
   it('should not check "all" when all choices are not checked', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     assert(choices.hasChoice('all'));
@@ -81,7 +81,7 @@ describe('.i (options.radio)', function() {
   it('should check "all" when all choices are checked', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     assert(choices.hasChoice('all'));
@@ -100,7 +100,7 @@ describe('.i (options.radio)', function() {
   it('should check "none" when all choices are unchecked', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     assert(choices.hasChoice('all'));

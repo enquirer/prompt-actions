@@ -10,7 +10,7 @@ describe('.tab', function() {
   it('should do nothing (noop)', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
     assert.equal(choices.position, 0);
 
     var res = choices.render(0);

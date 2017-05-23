@@ -10,7 +10,7 @@ describe('.up', function() {
   it('should move the pointer up one row', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
     assert.equal(choices.position, 0);
 
     var res = choices.render(1);
@@ -36,7 +36,7 @@ describe('.up', function() {
   it('should move to bottom when pointer is already at top', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.position, 0);
     var res = choices.render(choices.position);

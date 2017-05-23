@@ -10,7 +10,7 @@ describe('.a (options.radio)', function() {
   it('should check "all" when .a() is called', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     actions.a();
     assert.equal(choices.checked.length, 3);
@@ -19,7 +19,7 @@ describe('.a (options.radio)', function() {
   it('should uncheck "none" when "all" is checked', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     choices.check('none');
     assert(choices.isChecked('none'));

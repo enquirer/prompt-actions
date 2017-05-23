@@ -10,7 +10,7 @@ describe('.number (options.radio)', function() {
   it('should toggle choice.checked at the given number', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     assert(choices.hasChoice('all'));
@@ -38,7 +38,7 @@ describe('.number (options.radio)', function() {
   it('should do nothing when numbers are less than zero', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     assert(choices.hasChoice('all'));
@@ -73,7 +73,7 @@ describe('.number (options.radio)', function() {
   it('should do nothing when numbers are greater than choices length', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     assert(choices.hasChoice('all'));

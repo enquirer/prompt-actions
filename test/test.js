@@ -13,7 +13,7 @@ describe('Actions', function() {
 
   it('should instantiate', function() {
     var choices = new Choices(['foo', 'bar']);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
     assert(actions instanceof Actions);
   });
 });

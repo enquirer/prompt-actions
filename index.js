@@ -15,8 +15,8 @@
  * @api public
  */
 
-function Actions(choices) {
-  this.choices = choices;
+function Actions(prompt) {
+  this.prompt = prompt;
 }
 
 /**
@@ -162,6 +162,20 @@ Actions.prototype.position = function(pos) {
   }
   return this.choices.position;
 };
+
+/**
+ * Getter for getting the choices array from the question.
+ *
+ * @name .choices
+ * @return {Object} Choices object
+ * @api public
+ */
+
+Object.defineProperty(Actions.prototype, 'choices', {
+  get: function() {
+    return this.prompt.choices;
+  }
+});
 
 /**
  * Expose `Actions`

@@ -10,7 +10,7 @@ describe('.down', function() {
   it('should move the pointer down', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     var res = choices.render(0);
     assert.equal(choices.position, 0);
@@ -39,7 +39,7 @@ describe('.down', function() {
   it('should start move to top when on the last choice', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
     assert.equal(choices.position, 0);
 
     var res = choices.render(2);

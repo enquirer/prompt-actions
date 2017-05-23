@@ -10,7 +10,7 @@ describe('.i', function() {
   it('should invert all choices when "i" is pressed', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
 
@@ -30,7 +30,7 @@ describe('.i', function() {
   it('should uncheck already enabled choices when "i" is pressed', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
     assert.equal(choices.checked.length, 0);
 
     actions.i();
@@ -58,7 +58,7 @@ describe('.i', function() {
   it('should uncheck "all" and "none" when any other choices are checked', function() {
     var fixture = ['all', 'none', new Choices.Separator(), 'foo', 'bar', 'baz'];
     var choices = new Choices(fixture);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
     assert.equal(choices.checked.length, 0);
 
     choices.check('all');
@@ -69,7 +69,7 @@ describe('.i', function() {
   it('should uncheck "all" when "none" is checked', function() {
     var fixture = ['all', 'none', new Choices.Separator(), 'foo', 'bar', 'baz'];
     var choices = new Choices(fixture);
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
     assert.equal(choices.checked.length, 0);
 
   });
@@ -77,7 +77,7 @@ describe('.i', function() {
   it('should check "none" when all other choices are unchecked', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     assert.equal(choices.checked.length, 0);
     assert(!choices.isChecked('none'));
@@ -93,7 +93,7 @@ describe('.i', function() {
   it('should check "none" when all other choices are unchecked', function() {
     var fixture = ['foo', 'bar', 'baz'];
     var choices = new Choices(fixture, {radio: true});
-    var actions = new Actions(choices);
+    var actions = new Actions({choices: choices});
 
     actions.i();
     var res = choices.render(choices.position);
