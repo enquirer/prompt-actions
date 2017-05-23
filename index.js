@@ -30,10 +30,7 @@ function Actions(prompt) {
  */
 
 Actions.prototype.number = function(pos, key) {
-  if (key && key.hasOwnProperty('value')) {
-    pos = Number(key.value);
-  }
-  pos = this.position(pos);
+  pos = this.position(pos, key);
   if (pos >= 0 && pos <= this.choices.length) {
     this.choices.position = pos - 1;
     this.choices.radio();
@@ -153,7 +150,10 @@ Actions.prototype.enter = function(pos, key) {
  * @api public
  */
 
-Actions.prototype.position = function(pos) {
+Actions.prototype.position = function(pos, key) {
+  if (key && key.name === 'number' && key.hasOwnProperty('value')) {
+    pos = Number(key.value);
+  }
   if (typeof pos === 'number') {
     if (pos >= 0 && pos <= this.choices.length) {
       this.choices.position = pos;
