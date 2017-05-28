@@ -1,7 +1,7 @@
 {
   "name": "prompt-actions",
   "description": "Action manager for prompt-base.",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "homepage": "https://github.com/enquirer/prompt-actions",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "enquirer/prompt-actions",
