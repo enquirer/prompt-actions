@@ -19,6 +19,19 @@
   "scripts": {
     "test": "mocha"
   },
+  "dependencies": {
+    "debug": "^2.6.8"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.1",
+    "is-windows": "^1.0.1",
+    "prompt-choices": "^3.0.2",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-format-md": "^0.1.12"
+  },
   "keywords": [
     "actions",
     "prompt"
@@ -36,28 +49,17 @@
       "list": [
         "enquirer",
         "prompt-base",
-        "prompt-choices"
+        "prompt-choices",
+        "prompt-sort",
+        "prompt-grid"
       ]
-    },
-    "lint": {
-      "reflinks": true
     },
     "reflinks": [
       "base-prompt",
       "prompt-base"
-    ]
-  },
-  "devDependencies": {
-    "mocha": "^3.4.1",
-    "is-windows": "^1.0.1",
-    "prompt-choices": "^3.0.2",
-    "gulp": "^3.9.1",
-    "gulp-mocha": "^3.0.1",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-format-md": "^0.1.12"
-  },
-  "dependencies": {
-    "debug": "^2.6.8"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
