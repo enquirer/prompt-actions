@@ -1,5 +1,7 @@
 'use strict';
 
+var debug = require('debug')('prompt-actions');
+
 /**
  * Create an instance of `Actions`, optionally with an instance
  * of [prompt-choices][]. Any of the methods may be overridden in custom
@@ -16,6 +18,7 @@
  */
 
 function Actions(prompt) {
+  debug('initializing from <%s>', __filename);
   this.prompt = prompt;
 }
 
