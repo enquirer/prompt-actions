@@ -12,11 +12,11 @@ describe('.space', function() {
     var actions = new Actions({choices: choices});
 
     choices.toggle();
-    assert.equal(choices.get('foo').checked, true);
-    assert.equal(choices.get('bar').checked, true);
+    assert.equal(choices.isChecked('foo'), true);
+    assert.equal(choices.isChecked('bar'), true);
 
     actions.space(0);
-    assert.equal(choices.get('foo').checked, false);
+    assert.equal(choices.isChecked('foo'), false);
   });
 
   it('should work when choices are defined after instantiation', function() {
@@ -25,10 +25,10 @@ describe('.space', function() {
     choices.addChoices(['foo', 'bar']);
 
     choices.toggle();
-    assert.equal(choices.get('foo').checked, true);
-    assert.equal(choices.get('bar').checked, true);
+    assert.equal(choices.isChecked('foo'), true);
+    assert.equal(choices.isChecked('bar'), true);
 
     actions.space(0);
-    assert.equal(choices.get('foo').checked, false);
+    assert.equal(choices.isChecked('foo'), false);
   });
 });

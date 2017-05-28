@@ -12,29 +12,11 @@ describe('.tab', function() {
     var choices = new Choices(fixture);
     var actions = new Actions({choices: choices});
     assert.equal(choices.position, 0);
-
-    var res = choices.render(0);
+    choices.position = actions.tab(choices.position);
+    choices.position = actions.tab(choices.position);
+    choices.position = actions.tab(choices.position);
+    choices.position = actions.tab(choices.position);
+    choices.position = actions.tab(choices.position);
     assert.equal(choices.position, 0);
-
-    if (isWindows()) {
-      assert.equal(res, '\n\u001b[36m>\u001b[39m( ) foo\n ( ) bar\n ( ) baz');
-    } else {
-      assert.equal(res, '\n\u001b[36m❯\u001b[39m◯ foo\n ◯ bar\n ◯ baz');
-    }
-
-    choices.position = actions.tab(choices.position);
-    choices.position = actions.tab(choices.position);
-    choices.position = actions.tab(choices.position);
-    choices.position = actions.tab(choices.position);
-    choices.position = actions.tab(choices.position);
-
-    res = choices.render(choices.position);
-    assert.equal(choices.position, 0);
-
-    if (isWindows()) {
-      assert.equal(res, '\n\u001b[36m>\u001b[39m( ) foo\n ( ) bar\n ( ) baz');
-    } else {
-      assert.equal(res, '\n\u001b[36m❯\u001b[39m◯ foo\n ◯ bar\n ◯ baz');
-    }
   });
 });

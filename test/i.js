@@ -96,20 +96,13 @@ describe('.i', function() {
     var actions = new Actions({choices: choices});
 
     actions.i();
-    var res = choices.render(choices.position);
-    if (isWindows()) {
-      assert.equal(res, '\n \n\u001b[36m>\u001b[39m\u001b[32m(*)\u001b[39m \u001b[1mall\u001b[22m\n ( ) \u001b[1mnone\u001b[22m\n \u001b[2m────────\u001b[22m\n   \u001b[32m\u221A\u001b[39m foo\n   \u001b[32m\u221A\u001b[39m bar\n   \u001b[32m\u221A\u001b[39m baz');
-    } else {
-      assert.equal(res, '\n \n\u001b[36m❯\u001b[39m\u001b[32m◉\u001b[39m \u001b[1mall\u001b[22m\n ◯ \u001b[1mnone\u001b[22m\n \u001b[2m────────\u001b[22m\n   \u001b[32m✓\u001b[39m foo\n   \u001b[32m✓\u001b[39m bar\n   \u001b[32m✓\u001b[39m baz');
-    }
+    choices.render(choices.position);
+    assert.equal(choices.checked.length, 3);
+    assert(choices.isChecked('all'));
 
     actions.i();
-    res = choices.render(choices.position);
-
-    if (isWindows()) {
-      assert.equal(res, '\n \n\u001b[36m>\u001b[39m( ) \u001b[1mall\u001b[22m\n \u001b[32m(*)\u001b[39m \u001b[1mnone\u001b[22m\n \u001b[2m────────\u001b[22m\n   ☐ foo\n   ☐ bar\n   ☐ baz');
-    } else {
-      assert.equal(res, '\n \n\u001b[36m❯\u001b[39m◯ \u001b[1mall\u001b[22m\n \u001b[32m◉\u001b[39m \u001b[1mnone\u001b[22m\n \u001b[2m────────\u001b[22m\n   ☐ foo\n   ☐ bar\n   ☐ baz');
-    }
+    choices.render(choices.position);
+    assert.equal(choices.checked.length, 0);
+    assert(choices.isChecked('none'));
   });
 });
