@@ -215,6 +215,17 @@ Actions.prototype.enter = function(pos, key) {
 };
 
 /**
+ * Returns the current choices position
+ *
+ * @return {Number} Returns `choices.position`
+ * @api public
+ */
+
+Actions.prototype.identity = function(pos) {
+  return this.position(pos);
+};
+
+/**
  * Helper for getting the current corsor position.
  *
  * @param {Number} `pos` (optional) Current position
